@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OFT.BankApp.Web.Data.Context;
+using OFT.BankApp.Web.Models;
 
 namespace OFT.BankApp.Web.Controllers
 {
@@ -13,7 +14,12 @@ namespace OFT.BankApp.Web.Controllers
         }
         public IActionResult Index()
         {
-            return View(_contextAccessor.ApplicationUsers.ToList());
+            return View(_contextAccessor.ApplicationUsers.Select(x=> new UserListModel
+            {
+                Id = x.Id,
+                Name = x.Name,
+                Surname = x.Surname
+            }).ToList());
         }
     }
 }
