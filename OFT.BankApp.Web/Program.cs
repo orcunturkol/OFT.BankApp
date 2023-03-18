@@ -7,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<BankContext>(opt =>
 {
-    opt.UseSqlServer("server=(localdb)\\mssqllocaldb; database = BankDb; Integrated Security=true;");
+    opt.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=BankDB;Trusted_Connection=True;");
 }); 
 builder.Services.AddControllersWithViews();
 
