@@ -23,9 +23,9 @@ namespace OFT.BankApp.Web.Data.Repositories
             return _bankContext.ApplicationUsers.SingleOrDefault(x => x.Id == id);
         }
 
-        public static implicit operator ApplicationUserRepository(BankContext v)
-        {
-            throw new NotImplementedException();
+        public void Create (ApplicationUser user) { 
+        _bankContext.ApplicationUsers.Add(user);
+        _bankContext.SaveChanges();
         }
     }
 }

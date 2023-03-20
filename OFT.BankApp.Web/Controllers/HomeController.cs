@@ -9,13 +9,11 @@ namespace OFT.BankApp.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly BankContext _contextAccessor;
         private readonly IApplicationUserRepository _applicationUserRepository;
         private readonly IUserMapper _userMapper;
-        public HomeController(BankContext contextAccessor, IApplicationUserRepository applicationUserRepository
+        public HomeController(IApplicationUserRepository applicationUserRepository
             , IUserMapper userMapper)
         {
-            _contextAccessor = contextAccessor;
             _applicationUserRepository = applicationUserRepository;
             _userMapper = userMapper;
         }

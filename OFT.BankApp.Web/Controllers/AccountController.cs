@@ -9,15 +9,16 @@ namespace OFT.BankApp.Web.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly BankContext _context;
         private readonly IApplicationUserRepository _applicationUserRepository;
         private readonly IUserMapper _userMapper;
-
-        public AccountController(BankContext context, IUserMapper userMapper, IApplicationUserRepository applicationUserRepository)
+        private readonly IAccountRepository _accountRepository;
+        private readonly IAccountMapper _accountMapper;
+        public AccountController(IUserMapper userMapper, IApplicationUserRepository applicationUserRepository, IAccountRepository accountRepository, IAccountMapper accountMapper)
         {
-            _context = context;
             _applicationUserRepository = applicationUserRepository;
             _userMapper = userMapper;
+            _accountRepository = accountRepository;
+            _accountMapper = accountMapper;
         }
 
         public IActionResult Create(int id)
@@ -29,14 +30,7 @@ namespace OFT.BankApp.Web.Controllers
         [HttpPost]
         public IActionResult Create(AccountCreateModel model)
         {
-            _context.Accounts.Add(new Data.Entitites.Account
-            {
-                AccountNumber = model.AccountNumber,
-                ApplicationUserId = model.ApplicationUserId,
-                Balance = model.Balance
-            });
-
-            _context.SaveChanges();
+            _accountRepository.Create(_accountMapper.Map(model));
 
             return RedirectToAction("Index", "Home");
         }
