@@ -1,7 +1,9 @@
-using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
 using OFT.BankApp.Web.Data.Context;
+using OFT.BankApp.Web.Data.Interfaces;
+using OFT.BankApp.Web.Data.Repositories;
+using OFT.BankApp.Web.Mapping;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,7 +11,12 @@ builder.Services.AddDbContext<BankContext>(opt =>
 {
     opt.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=BankDB;Trusted_Connection=True;");
 }); 
+
+builder.Services.AddScoped<IApplicationUserRepository, ApplicationUserRepository>();
+builder.Services.AddScoped<IUserMapper, UserMapper>();
+
 builder.Services.AddControllersWithViews();
+
 
 var app = builder.Build();
 
