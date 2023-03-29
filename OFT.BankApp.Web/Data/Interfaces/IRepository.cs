@@ -4,8 +4,9 @@
     {
         void Create(T entity);
         void Remove(T entity);
-        List<T> GetAll(int id);
+        List<T> GetAll();
         T GetById(object id);
         void Update(T entity);
+        IQueryable<T> GetQueryable();
     }
 }

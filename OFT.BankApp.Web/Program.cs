@@ -4,6 +4,7 @@ using OFT.BankApp.Web.Data.Context;
 using OFT.BankApp.Web.Data.Interfaces;
 using OFT.BankApp.Web.Data.Repositories;
 using OFT.BankApp.Web.Mapping;
+using OFT.BankApp.Web.UnitOfWork;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,11 +13,12 @@ builder.Services.AddDbContext<BankContext>(opt =>
     opt.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=BankDB;Trusted_Connection=True;");
 }); 
 
-builder.Services.AddScoped<IApplicationUserRepository, ApplicationUserRepository>();
+//builder.Services.AddScoped<IApplicationUserRepository, ApplicationUserRepository>();
 builder.Services.AddScoped<IUserMapper, UserMapper>();
-builder.Services.AddScoped<IAccountRepository, AccountRepository>();
+//builder.Services.AddScoped<IAccountRepository, AccountRepository>();
 builder.Services.AddScoped<IAccountMapper, AccountMapper>();
-builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+//builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+builder.Services.AddScoped<IUow, Uow>();
 
 builder.Services.AddControllersWithViews();
 

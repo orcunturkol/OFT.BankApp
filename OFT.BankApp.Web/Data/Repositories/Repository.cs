@@ -15,16 +15,14 @@ namespace OFT.BankApp.Web.Data.Repositories
         public void Create (T entity)
         {
             _bankContext.Set<T>().Add(entity);
-            _bankContext.SaveChanges();
         }
 
         public void Remove (T entity)
         {
             _bankContext.Set<T>().Remove(entity);
-            _bankContext.SaveChanges();
         }
 
-        public List<T> GetAll (int id)
+        public List<T> GetAll ()
         {
             return _bankContext.Set<T>().ToList();
         }
@@ -37,7 +35,12 @@ namespace OFT.BankApp.Web.Data.Repositories
         public void Update (T entity)
         {
             _bankContext.Set<T>().Update(entity);
-            _bankContext.SaveChanges();
+        }
+
+        public IQueryable<T> GetQueryable()
+        {
+            return _bankContext.Set<T>().AsQueryable();
+
         }
     }
 }
